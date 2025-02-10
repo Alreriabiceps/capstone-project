@@ -5,10 +5,10 @@ import { Outlet } from "react-router";
 const GuestLayout = () => {
     return (
         <div>
-            <div className="">
+            {/* <div className="">
             <img src={reactLogo} className="logo" alt="React Logo" />
             <Outlet />
-            </div>
+            </div> */}
         </div>
     )
 }

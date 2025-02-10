@@ -23,7 +23,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 pb-5"> {/* Added pb-5 for padding-bottom */}
       <h2>Dashboard</h2>
       <div className="row">
         <div className="col-md-4">
