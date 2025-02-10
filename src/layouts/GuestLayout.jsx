@@ -1,16 +1,12 @@
-import React from 'react'
-import reactLogo from '../assets/react.svg'
-import { Outlet } from "react-router";
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 
 const GuestLayout = () => {
-    return (
-        <div>
-            {/* <div className="">
-            <img src={reactLogo} className="logo" alt="React Logo" />
-            <Outlet />
-            </div> */}
-        </div>
-    )
-}
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
+};
 
-export default GuestLayout
+export default GuestLayout;
