@@ -1,0 +1,66 @@
+body {
+  background-color: #222831;
+  color: #EEEEEE;
+}
+
+.hover-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.hover-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hover-card .card-header {
+  transition: background-color 0.3s, color 0.3s;
+  background-color: #222831;
+  color: #EEEEEE;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hover-card:hover .card-header {
+  background-color: #393E46;
+  color: #EEEEEE;
+}
+
+.hover-card .btn-light {
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 20px;
+}
+
+.hover-card .btn-light:hover {
+  background-color: #EEEEEE;
+  color: #00ADB5;
+}
+
+.hover-card .card-body {
+  color: #EEEEEE;
+  background: linear-gradient(135deg, #00ADB5 0%, #393E46 100%);
+}
+
+.hover-card .table-dark {
+  background-color: #222831;
+  color: #EEEEEE;
+}
+
+.hover-card .table-dark th,
+.hover-card .table-dark td {
+  border-color: #454d55;
+}
+
+.hover-card .table-dark thead th {
+  background-color: #393E46;
+}
+
+.hover-card .table-dark tbody tr {
+  background-color: #222831;
+}
+
+.hover-card .table-dark tbody tr:hover {
+  background-color: #555e68;
+}

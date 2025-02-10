@@ -1,0 +1,65 @@
+.navbar {
+    background-color: #222831;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem 2rem;
+  }
+  
+  .navbar-brand {
+    font-weight: bold;
+    color: #EEEEEE;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+  }
+  
+  .navbar-brand:hover {
+    color: #00ADB5;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #EEEEEE;
+    transition: color 0.3s, background-color 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #222831;
+    background-color: #00ADB5;
+  }
+  
+  .navbar-nav .dropdown-menu {
+    background-color: #393E46;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-nav .dropdown-item {
+    color: #EEEEEE;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .navbar-nav .dropdown-item:hover {
+    background-color: #00ADB5;
+    color: #222831;
+  }
+  
+  .navbar-toggler {
+    border-color: #EEEEEE;
+  }
+  
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23EEEEEE' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+  }
+  
+  .navbar-nav.ms-auto .nav-link {
+    color: #EEEEEE;
+    transition: color 0.3s, background-color 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+  }
+  
+  .navbar-nav.ms-auto .nav-link:hover {
+    color: #222831;
+    background-color: #00ADB5;
+  }
