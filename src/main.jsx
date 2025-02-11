@@ -2,7 +2,7 @@ import './index.css';
 import * as bootstrap from 'bootstrap';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router';
 
 import GuestLayout from './layouts/GuestLayout.jsx';
 import AdminLayout from './layouts/AdminLayout.jsx';
