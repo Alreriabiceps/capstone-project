@@ -13,6 +13,8 @@ import AdminCustomers from './pages/admin/Customers.jsx';
 import AddCustomer from './pages/admin/AddCustomer.jsx';
 import SMSReminder from './pages/admin/SMSReminder.jsx';
 import ListOfDeadlines from './pages/admin/ListOfDeadlines.jsx';
+import Profile from './pages/admin/Profile.jsx';
+import Settings from './pages/admin/Settings.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -28,6 +30,8 @@ createRoot(document.getElementById('root')).render(
           <Route path="add-customer" element={<AddCustomer />} />
           <Route path="sms-reminder" element={<SMSReminder />} />
           <Route path="list-deadlines" element={<ListOfDeadlines />} />
+          <Route path="profile" element={<Profile/>} />
+          <Route path="settings" element={<Settings/>} />
         </Route>
       </Routes>
     </BrowserRouter>

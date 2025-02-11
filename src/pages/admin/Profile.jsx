@@ -28,7 +28,7 @@ const Customers = () => {
           className="form-select me-2"
           value={filter}
           onChange={handleFilterChange}
-          style={{ maxWidth: '300px', backgroundColor: '#222831', color: '#EEEEEE', border: '1px solid #EEEEEE' }}
+          style={{ maxWidth: '300px', height: '38px', backgroundColor: '#222831', color: '#EEEEEE', border: '1px solid #EEEEEE' }}
         >
           <option value="name">Name</option>
           <option value="email">Email</option>
@@ -37,7 +37,7 @@ const Customers = () => {
         <input
           type="text"
           className="form-control"
-          style={{ maxWidth: '300px', backgroundColor: '#222831', color: '#EEEEEE', border: '1px solid #EEEEEE' }}
+          style={{ maxWidth: '300px', height: '38px', backgroundColor: '#222831', color: '#EEEEEE', border: '1px solid #EEEEEE' }}
           placeholder={`Search by ${filter}`}
           value={searchTerm}
           onChange={handleSearchChange}
