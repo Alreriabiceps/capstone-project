@@ -1,107 +1,146 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-const AddCustomer = () => {
+const AddCustomer = ({ onCustomerAdded }) => {
+  const [formData, setFormData] = useState({
+    accountNumber: '',
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    address: '',
+    barangay: '',
+    town: '',
+    landmark: '',
+    mobile: '',
+    email: '',
+    plan: 'Plan A',
+    dateInstalled: '',
+    installer: '',
+    dueDate: '',
+    napLocation: '',
+    power: '',
+    focLength: ''
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log('Form data:', formData); // Log form data to ensure it's being captured correctly
+    try {
+      const response = await axios.post('http://localhost:3000/api/customers', formData);
+      console.log('Customer added:', response.data);
+      alert('Customer added successfully!');
+      // Reset the form
+      setFormData({
+        accountNumber: '',
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        address: '',
+        barangay: '',
+        town: '',
+        landmark: '',
+        mobile: '',
+        email: '',
+        plan: 'Plan A',
+        dateInstalled: '',
+        installer: '',
+        dueDate: '',
+        napLocation: '',
+        power: '',
+        focLength: ''
+      });
+      // Call the callback function to update the customer list
+      onCustomerAdded();
+    } catch (error) {
+      console.error('Error adding customer:', error);
+    }
+  };
+
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 mb-5">
       <h2>Add New Customer</h2>
-      <form>
-        <div className="mb-3">
-          <label htmlFor="accountNumber" className="form-label">Account Number</label>
-          <input type="text" className="form-control" id="accountNumber" />
+      <form onSubmit={handleSubmit}>
+        <div className="row">
+          <div className="col-md-6 mb-3">
+            <label htmlFor="accountNumber" className="form-label">Account Number</label>
+            <input type="text" className="form-control" id="accountNumber" value={formData.accountNumber} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="firstName" className="form-label">First Name</label>
+            <input type="text" className="form-control" id="firstName" value={formData.firstName} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="middleName" className="form-label">Middle Name</label>
+            <input type="text" className="form-control" id="middleName" value={formData.middleName} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="lastName" className="form-label">Last Name</label>
+            <input type="text" className="form-control" id="lastName" value={formData.lastName} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="address" className="form-label">Address</label>
+            <input type="text" className="form-control" id="address" value={formData.address} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="barangay" className="form-label">Barangay</label>
+            <input type="text" className="form-control" id="barangay" value={formData.barangay} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="town" className="form-label">Town</label>
+            <input type="text" className="form-control" id="town" value={formData.town} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="landmark" className="form-label">Landmark</label>
+            <input type="text" className="form-control" id="landmark" value={formData.landmark} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="mobile" className="form-label">Mobile #</label>
+            <input type="text" className="form-control" id="mobile" value={formData.mobile} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input type="email" className="form-control" id="email" value={formData.email} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="plan" className="form-label">Plan</label>
+            <select className="form-control" id="plan" value={formData.plan} onChange={handleChange}>
+              <option value="Plan A">Plan A</option>
+              <option value="Plan B">Plan B</option>
+              <option value="Plan C">Plan C</option>
+              {/* Add more plan options here */}
+            </select>
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="dateInstalled" className="form-label">Date Installed</label>
+            <input type="date" className="form-control" id="dateInstalled" value={formData.dateInstalled} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="installer" className="form-label">Installer</label>
+            <input type="text" className="form-control" id="installer" value={formData.installer} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="dueDate" className="form-label">Due Date</label>
+            <input type="date" className="form-control" id="dueDate" value={formData.dueDate} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="napLocation" className="form-label">NAP Location</label>
+            <input type="text" className="form-control" id="napLocation" value={formData.napLocation} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="power" className="form-label">Power</label>
+            <input type="text" className="form-control" id="power" value={formData.power} onChange={handleChange} />
+          </div>
+          <div className="col-md-6 mb-3">
+            <label htmlFor="focLength" className="form-label">FOC Length</label>
+            <input type="text" className="form-control" id="focLength" value={formData.focLength} onChange={handleChange} />
+          </div>
         </div>
-        <div className="mb-3">
-          <label htmlFor="customerName" className="form-label">Customer Name</label>
-          <input type="text" className="form-control" id="customerName" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="registeredEmail" className="form-label">Registered Email</label>
-          <input type="email" className="form-control" id="registeredEmail" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="currentBillAmount" className="form-label">Current Bill Amount</label>
-          <input type="number" className="form-control" id="currentBillAmount" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="dueDate" className="form-label">Due Date</label>
-          <input type="date" className="form-control" id="dueDate" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="billingCycle" className="form-label">Billing Cycle</label>
-          <input type="text" className="form-control" id="billingCycle" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="pastDueBalance" className="form-label">Past Due Balance</label>
-          <input type="number" className="form-control" id="pastDueBalance" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="paymentMethods" className="form-label">Payment Methods</label>
-          <select className="form-control" id="paymentMethods">
-            <option>Credit Card</option>
-            <option>Bank Transfer</option>
-            <option>E-Wallet</option>
-          </select>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="lastPaymentDate" className="form-label">Last Payment Date</label>
-          <input type="date" className="form-control" id="lastPaymentDate" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="paymentConfirmationNumber" className="form-label">Payment Confirmation Number</label>
-          <input type="text" className="form-control" id="paymentConfirmationNumber" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="internetSpeed" className="form-label">Internet Speed</label>
-          <input type="text" className="form-control" id="internetSpeed" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="dataLimit" className="form-label">Data Limit</label>
-          <input type="text" className="form-control" id="dataLimit" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="packageDetails" className="form-label">Package Details</label>
-          <input type="text" className="form-control" id="packageDetails" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="addOns" className="form-label">Add-Ons</label>
-          <input type="text" className="form-control" id="addOns" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="dataConsumption" className="form-label">Data Consumption</label>
-          <input type="text" className="form-control" id="dataConsumption" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="extraCharges" className="form-label">Extra Charges</label>
-          <input type="number" className="form-control" id="extraCharges" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="overageFees" className="form-label">Overage Fees</label>
-          <input type="number" className="form-control" id="overageFees" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="connectionStatus" className="form-label">Connection Status</label>
-          <input type="text" className="form-control" id="connectionStatus" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="troubleshootingSteps" className="form-label">Troubleshooting Steps</label>
-          <input type="text" className="form-control" id="troubleshootingSteps" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="serviceDowntimeCredits" className="form-label">Service Downtime Credits</label>
-          <input type="number" className="form-control" id="serviceDowntimeCredits" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="loyaltyRewards" className="form-label">Loyalty Rewards</label>
-          <input type="text" className="form-control" id="loyaltyRewards" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="referralBonuses" className="form-label">Referral Bonuses</label>
-          <input type="text" className="form-control" id="referralBonuses" />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="promotionalOffers" className="form-label">Promotional Offers</label>
-          <input type="text" className="form-control" id="promotionalOffers" />
-        </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-primary mb-5">Submit</button>
       </form>
     </div>
   );

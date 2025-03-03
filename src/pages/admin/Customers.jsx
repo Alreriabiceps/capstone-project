@@ -1,84 +1,157 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import AddCustomer from './AddCustomer'; // Import the AddCustomer component
+import './Customers.css'; // Import the CSS file
 
 const Customers = () => {
+  const [customers, setCustomers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filter, setFilter] = useState('name');
+  const [filter, setFilter] = useState('firstName');
+  const [editingCustomer, setEditingCustomer] = useState(null);
+  const [formData, setFormData] = useState({});
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
+  useEffect(() => {
+    fetchCustomers();
+  }, []);
+
+  const fetchCustomers = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/api/customers');
+      setCustomers(response.data);
+    } catch (error) {
+      console.error('Error fetching customers:', error);
+    }
   };
 
-  const handleFilterChange = (e) => {
-    setFilter(e.target.value);
+  const handleSearchChange = (e) => setSearchTerm(e.target.value);
+  const handleFilterChange = (e) => setFilter(e.target.value);
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this customer?')) {
+      try {
+        await axios.delete(`http://localhost:3000/api/customers/${id}`);
+        fetchCustomers();
+      } catch (error) {
+        console.error('Error deleting customer:', error);
+      }
+    }
   };
 
-  const customers = [
-    // Add customer data here
-  ];
+  const handleEdit = (customer) => {
+    setEditingCustomer(customer._id);
+    setFormData(customer);
+  };
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`http://localhost:3000/api/customers/${editingCustomer}`, formData);
+      setEditingCustomer(null);
+      fetchCustomers();
+    } catch (error) {
+      console.error('Error updating customer:', error);
+    }
+  };
+
+  const handleView = (customer) => {
+    setEditingCustomer(customer._id);
+    setFormData(customer);
+  };
+
+  const handleCancelEdit = () => {
+    setEditingCustomer(null);
+    setFormData({});
+  };
 
   const filteredCustomers = customers.filter((customer) =>
-    customer[filter].toLowerCase().includes(searchTerm.toLowerCase())
+    customer[filter]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div className="container mt-5">
       <h2>Customers</h2>
-      <div className="mb-3 d-flex">
-        <select
-          className="form-select me-2"
-          value={filter}
-          onChange={handleFilterChange}
-          style={{ maxWidth: '300px', backgroundColor: '#222831', color: '#EEEEEE', border: '1px solid #EEEEEE' }}
-        >
-          <option value="name">Name</option>
-          <option value="email">Email</option>
-          <option value="accountNumber">Account Number</option>
-        </select>
-        <input
-          type="text"
-          className="form-control"
-          style={{ maxWidth: '300px', backgroundColor: '#222831', color: '#EEEEEE', border: '1px solid #EEEEEE' }}
-          placeholder={`Search by ${filter}`}
-          value={searchTerm}
-          onChange={handleSearchChange}
-        />
-      </div>
-      <table className="table table-striped table-dark">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Account Number</th>
-            <th scope="col">Customer Name</th>
-            <th scope="col">Registered Email</th>
-            <th scope="col">Current Bill Amount</th>
-            <th scope="col">Due Date</th>
-            <th scope="col">Payment Methods</th>
-            <th scope="col">Last Payment Date</th>
-            <th scope="col">Payment Confirmation Number</th>
-            <th scope="col">Internet Speed</th>
-            <th scope="col">Data Limit</th>
-            <th scope="col">Package Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredCustomers.map((customer, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{customer.accountNumber}</td>
-              <td>{customer.name}</td>
-              <td>{customer.email}</td>
-              <td>{customer.currentBillAmount}</td>
-              <td>{customer.dueDate}</td>
-              <td>{customer.paymentMethods}</td>
-              <td>{customer.lastPaymentDate}</td>
-              <td>{customer.paymentConfirmationNumber}</td>
-              <td>{customer.internetSpeed}</td>
-              <td>{customer.dataLimit}</td>
-              <td>{customer.packageDetails}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {editingCustomer ? (
+        <div>
+          <h3>Edit Customer</h3>
+          <AddCustomer
+            formData={formData}
+            setFormData={setFormData}
+            handleSubmit={handleUpdate}
+            handleCancelEdit={handleCancelEdit}
+          />
+        </div>
+      ) : (
+        <div>
+          <div className="mb-3 d-flex">
+            <select className="form-select me-2" value={filter} onChange={handleFilterChange}>
+              <option value="firstName">First Name</option>
+              <option value="middleName">Middle Name</option>
+              <option value="lastName">Last Name</option>
+              <option value="email">Email</option>
+              <option value="accountNumber">Account Number</option>
+            </select>
+            <input type="text" className="form-control" placeholder={`Search by ${filter}`} value={searchTerm} onChange={handleSearchChange} />
+          </div>
+          <table className="table table-striped table-dark customers-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Account Number</th>
+                <th>First Name</th>
+                <th>Middle Name</th>
+                <th>Last Name</th>
+                <th>Address</th>
+                <th>Barangay</th>
+                <th>Town</th>
+                <th>Landmark</th>
+                <th>Mobile #</th>
+                <th>Email</th>
+                <th>Plan</th>
+                <th>Date Installed</th>
+                <th>Installer</th>
+                <th>Due Date</th>
+                <th>NAP Location</th>
+                <th>Power</th>
+                <th>FOC Length</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredCustomers.map((customer, index) => (
+                <tr key={customer._id}>
+                  <td>{index + 1}</td>
+                  <td>{customer.accountNumber}</td>
+                  <td>{customer.firstName}</td>
+                  <td>{customer.middleName}</td>
+                  <td>{customer.lastName}</td>
+                  <td>{customer.address}</td>
+                  <td>{customer.barangay}</td>
+                  <td>{customer.town}</td>
+                  <td>{customer.landmark}</td>
+                  <td>{customer.mobile}</td>
+                  <td>{customer.email}</td>
+                  <td>{customer.plan}</td>
+                  <td>{customer.dateInstalled ? new Date(customer.dateInstalled).toLocaleDateString() : 'N/A'}</td>
+                  <td>{customer.installer}</td>
+                  <td>{customer.dueDate ? new Date(customer.dueDate).toLocaleDateString() : 'N/A'}</td>
+                  <td>{customer.napLocation}</td>
+                  <td>{customer.power}</td>
+                  <td>{customer.focLength}</td>
+                  <td>
+                    <button className="btn btn-info" onClick={() => handleView(customer)}>View</button>
+                    <button className="btn btn-danger ms-2" onClick={() => handleDelete(customer._id)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };

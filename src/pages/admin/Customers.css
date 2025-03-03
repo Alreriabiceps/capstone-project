@@ -1,0 +1,106 @@
+.customers-table {
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  .customers-table th,
+  .customers-table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .customers-table th:nth-child(1),
+  .customers-table td:nth-child(1) {
+    width: 5%; /* Adjust the width for the index column */
+  }
+  
+  .customers-table th:nth-child(2),
+  .customers-table td:nth-child(2) {
+    width: 10%; /* Adjust the width for the account number column */
+  }
+  
+  .customers-table th:nth-child(3),
+  .customers-table td:nth-child(3) {
+    width: 10%; /* Adjust the width for the first name column */
+  }
+  
+  .customers-table th:nth-child(4),
+  .customers-table td:nth-child(4) {
+    width: 10%; /* Adjust the width for the middle name column */
+  }
+  
+  .customers-table th:nth-child(5),
+  .customers-table td:nth-child(5) {
+    width: 10%; /* Adjust the width for the last name column */
+  }
+  
+  .customers-table th:nth-child(6),
+  .customers-table td:nth-child(6) {
+    width: 15%; /* Adjust the width for the address column */
+  }
+  
+  .customers-table th:nth-child(7),
+  .customers-table td:nth-child(7) {
+    width: 10%; /* Adjust the width for the barangay column */
+  }
+  
+  .customers-table th:nth-child(8),
+  .customers-table td:nth-child(8) {
+    width: 10%; /* Adjust the width for the town column */
+  }
+  
+  .customers-table th:nth-child(9),
+  .customers-table td:nth-child(9) {
+    width: 10%; /* Adjust the width for the landmark column */
+  }
+  
+  .customers-table th:nth-child(10),
+  .customers-table td:nth-child(10) {
+    width: 10%; /* Adjust the width for the mobile column */
+  }
+  
+  .customers-table th:nth-child(11),
+  .customers-table td:nth-child(11) {
+    width: 10%; /* Adjust the width for the email column */
+  }
+  
+  .customers-table th:nth-child(12),
+  .customers-table td:nth-child(12) {
+    width: 10%; /* Adjust the width for the plan column */
+  }
+  
+  .customers-table th:nth-child(13),
+  .customers-table td:nth-child(13) {
+    width: 10%; /* Adjust the width for the date installed column */
+  }
+  
+  .customers-table th:nth-child(14),
+  .customers-table td:nth-child(14) {
+    width: 10%; /* Adjust the width for the installer column */
+  }
+  
+  .customers-table th:nth-child(15),
+  .customers-table td:nth-child(15) {
+    width: 10%; /* Adjust the width for the due date column */
+  }
+  
+  .customers-table th:nth-child(16),
+  .customers-table td:nth-child(16) {
+    width: 10%; /* Adjust the width for the NAP location column */
+  }
+  
+  .customers-table th:nth-child(17),
+  .customers-table td:nth-child(17) {
+    width: 10%; /* Adjust the width for the power column */
+  }
+  
+  .customers-table th:nth-child(18),
+  .customers-table td:nth-child(18) {
+    width: 10%; /* Adjust the width for the FOC length column */
+  }
+  
+  .customers-table th:nth-child(19),
+  .customers-table td:nth-child(19) {
+    width: 15%; /* Adjust the width for the actions column */
+  }
