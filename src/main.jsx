@@ -11,6 +11,7 @@ import Login from './pages/Login.jsx';
 import AdminBilling from './pages/admin/Billing.jsx';
 import AdminCustomers from './pages/admin/Customers.jsx';
 import AddCustomer from './pages/admin/AddCustomer.jsx';
+import EditCustomer from './pages/admin/EditCustomer.jsx'; 
 import SMSReminder from './pages/admin/SMSReminder.jsx';
 import ListOfDeadlines from './pages/admin/ListOfDeadlines.jsx';
 import Profile from './pages/admin/Profile.jsx';
@@ -28,6 +29,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="billing" element={<AdminBilling />} />
           <Route path="customers" element={<AdminCustomers />} />
           <Route path="add-customer" element={<AddCustomer />} />
+          <Route path="customers/:customerId/edit" element={<EditCustomer />} />
           <Route path="sms-reminder" element={<SMSReminder />} />
           <Route path="list-deadlines" element={<ListOfDeadlines />} />
           <Route path="profile" element={<Profile/>} />

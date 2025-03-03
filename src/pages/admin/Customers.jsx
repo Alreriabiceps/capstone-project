@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AddCustomer from './AddCustomer'; // Import the AddCustomer component
 import './Customers.css'; // Import the CSS file
+import { Link } from 'react-router';
 
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilter] = useState('firstName');
-  const [editingCustomer, setEditingCustomer] = useState(null);
-  const [formData, setFormData] = useState({});
-
+  
   useEffect(() => {
     fetchCustomers();
   }, []);
@@ -37,36 +36,14 @@ const Customers = () => {
     }
   };
 
-  const handleEdit = (customer) => {
-    setEditingCustomer(customer._id);
-    setFormData(customer);
-  };
+ 
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData({ ...formData, [id]: value });
   };
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.put(`http://localhost:3000/api/customers/${editingCustomer}`, formData);
-      setEditingCustomer(null);
-      fetchCustomers();
-    } catch (error) {
-      console.error('Error updating customer:', error);
-    }
-  };
-
-  const handleView = (customer) => {
-    setEditingCustomer(customer._id);
-    setFormData(customer);
-  };
-
-  const handleCancelEdit = () => {
-    setEditingCustomer(null);
-    setFormData({});
-  };
+  
 
   const filteredCustomers = customers.filter((customer) =>
     customer[filter]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
@@ -75,17 +52,6 @@ const Customers = () => {
   return (
     <div className="container mt-5">
       <h2>Customers</h2>
-      {editingCustomer ? (
-        <div>
-          <h3>Edit Customer</h3>
-          <AddCustomer
-            formData={formData}
-            setFormData={setFormData}
-            handleSubmit={handleUpdate}
-            handleCancelEdit={handleCancelEdit}
-          />
-        </div>
-      ) : (
         <div>
           <div className="mb-3 d-flex">
             <select className="form-select me-2" value={filter} onChange={handleFilterChange}>
@@ -143,7 +109,7 @@ const Customers = () => {
                   <td>{customer.power}</td>
                   <td>{customer.focLength}</td>
                   <td>
-                    <button className="btn btn-info" onClick={() => handleView(customer)}>View</button>
+                    <Link to={`/admin/customers/${customer._id}/edit`} className="btn btn-info">View</Link>
                     <button className="btn btn-danger ms-2" onClick={() => handleDelete(customer._id)}>Delete</button>
                   </td>
                 </tr>
@@ -151,7 +117,6 @@ const Customers = () => {
             </tbody>
           </table>
         </div>
-      )}
     </div>
   );
 };
