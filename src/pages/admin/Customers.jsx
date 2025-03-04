@@ -36,15 +36,6 @@ const Customers = () => {
     }
   };
 
- 
-
-  const handleInputChange = (e) => {
-    const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
-  };
-
-  
-
   const filteredCustomers = customers.filter((customer) =>
     customer[filter]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -55,11 +46,17 @@ const Customers = () => {
         <div>
           <div className="mb-3 d-flex">
             <select className="form-select me-2" value={filter} onChange={handleFilterChange}>
+              <option value="accountNumber">Account Number</option>
               <option value="firstName">First Name</option>
               <option value="middleName">Middle Name</option>
               <option value="lastName">Last Name</option>
+              <option value="address">Address</option>
+              <option value="barangay">Barangay</option>
+              <option value="town">Town</option>
+              <option value="landmark">Landmark</option>
+              <option value="mobile">Mobile</option>
               <option value="email">Email</option>
-              <option value="accountNumber">Account Number</option>
+              <option value="plan">Plan</option>
             </select>
             <input type="text" className="form-control" placeholder={`Search by ${filter}`} value={searchTerm} onChange={handleSearchChange} />
           </div>
@@ -75,15 +72,9 @@ const Customers = () => {
                 <th>Barangay</th>
                 <th>Town</th>
                 <th>Landmark</th>
-                <th>Mobile #</th>
+                <th>Mobile</th>
                 <th>Email</th>
                 <th>Plan</th>
-                <th>Date Installed</th>
-                <th>Installer</th>
-                <th>Due Date</th>
-                <th>NAP Location</th>
-                <th>Power</th>
-                <th>FOC Length</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -102,12 +93,6 @@ const Customers = () => {
                   <td>{customer.mobile}</td>
                   <td>{customer.email}</td>
                   <td>{customer.plan}</td>
-                  <td>{customer.dateInstalled ? new Date(customer.dateInstalled).toLocaleDateString() : 'N/A'}</td>
-                  <td>{customer.installer}</td>
-                  <td>{customer.dueDate ? new Date(customer.dueDate).toLocaleDateString() : 'N/A'}</td>
-                  <td>{customer.napLocation}</td>
-                  <td>{customer.power}</td>
-                  <td>{customer.focLength}</td>
                   <td>
                     <Link to={`/admin/customers/${customer._id}/edit`} className="btn btn-info">View</Link>
                     <button className="btn btn-danger ms-2" onClick={() => handleDelete(customer._id)}>Delete</button>

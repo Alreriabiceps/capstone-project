@@ -1,27 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Bar } from 'react-chartjs-2';
 import './Dashboard.css'; // Import the custom CSS file
 
 const Dashboard = () => {
-  const billingPreview = [
-    { id: 1, name: 'John Doe', amount: '$100' },
-    { id: 2, name: 'Jane Smith', amount: '$150' },
-  ];
+  const [customers, setCustomers] = useState([]);
+  const [billingPreview, setBillingPreview] = useState([]);
+  const [smsReminderPreview, setSmsReminderPreview] = useState([]);
+  const [deadlinesPreview, setDeadlinesPreview] = useState([]);
 
-  const smsReminderPreview = [
-    { id: 1, name: 'John Doe', message: 'Reminder: Your bill is due soon.' },
-    { id: 2, name: 'Jane Smith', message: 'Reminder: Your bill is due soon.' },
-  ];
+  useEffect(() => {
+    fetchCustomers();
+    fetchBillingPreview();
+    fetchSmsReminderPreview();
+    fetchDeadlinesPreview();
+  }, []);
 
-  const customersPreview = [
-    { id: 1, name: 'John Doe', email: 'john@example.com' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
-  ];
+  const fetchCustomers = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/api/customers');
+      setCustomers(response.data);
+    } catch (error) {
+      console.error('Error fetching customers:', error);
+    }
+  };
 
-  const deadlinesPreview = [
-    { id: 1, task: 'Submit monthly report', dueDate: '2025-02-15' },
-    { id: 2, task: 'Pay utility bills', dueDate: '2025-02-20' },
-  ];
+  const fetchBillingPreview = async () => {
+    // Fetch billing preview data from your API
+    // Example:
+    // const response = await axios.get('http://localhost:3000/api/billing-preview');
+    // setBillingPreview(response.data);
+  };
+
+  const fetchSmsReminderPreview = async () => {
+    // Fetch SMS reminder preview data from your API
+    // Example:
+    // const response = await axios.get('http://localhost:3000/api/sms-reminder-preview');
+    // setSmsReminderPreview(response.data);
+  };
+
+  const fetchDeadlinesPreview = async () => {
+    // Fetch deadlines preview data from your API
+    // Example:
+    // const response = await axios.get('http://localhost:3000/api/deadlines-preview');
+    // setDeadlinesPreview(response.data);
+  };
 
   const chartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June'],
@@ -66,11 +89,11 @@ const Dashboard = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {customersPreview.map((item) => (
-                    <tr key={item.id}>
-                      <td>{item.id}</td>
-                      <td>{item.name}</td>
-                      <td>{item.email}</td>
+                  {customers.map((customer, index) => (
+                    <tr key={customer._id}>
+                      <td>{index + 1}</td>
+                      <td>{customer.firstName} {customer.lastName}</td>
+                      <td>{customer.email}</td>
                     </tr>
                   ))}
                 </tbody>
